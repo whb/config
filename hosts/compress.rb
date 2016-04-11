@@ -15,6 +15,12 @@ def host2domain(host_name)
   host_name.split(".", 2)[1]
 end
 
+def not_domain(host_name)
+  item = host_name.split(".")
+  item.size > 2 ? true : false
+end
+
+
 
 def change_domain?(ip, host_name)
   if $keeping_ip == ""
@@ -22,7 +28,7 @@ def change_domain?(ip, host_name)
     $keeping_host_name = host_name
     return false
   end
-  if $keeping_ip == ip && host2domain($keeping_host_name) == host2domain(host_name)
+  if $keeping_ip == ip && host2domain($keeping_host_name) == host2domain(host_name) && not_domain(host_name)
     $repeat_host_count = $repeat_host_count + 1
     return false
   end
